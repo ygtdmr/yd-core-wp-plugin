@@ -1,0 +1,57 @@
+/**
+ * Main YD Admin UI styling.
+ * Contains layout adjustments for form tables and styling rules for delete buttons.
+ * Ensures consistent spacing, user interaction cues, and mobile responsiveness.
+ *
+ * Author: Yigit Demir
+ * Version: 1.0.0
+ * Since: 1.0.0
+ */
+
+ .yd-core {
+	.form-table {
+	  th {
+		// Table header padding
+		padding: 20px 20px 20px 0 !important;
+	  }
+	}
+  
+	// Delete link that is not a button
+	.delete:not(.button) {
+	  color: #b32d2e;
+	  text-decoration: underline;
+	  cursor: pointer;
+	}
+  
+	// Delete button styling
+	.button.delete {
+	  color: #b32d2e !important;
+	  border-color: #b32d2e !important;
+  
+	  &:focus {
+		// Focus outline for delete button
+		box-shadow: 0 0 0 1px #b32d2e !important;
+	  }
+	}
+
+	.postbox {
+		.form-table {
+		  td {
+			padding: 12px 32px 12px 12px !important;
+			vertical-align: unset;
+		  }
+		}
+	  }
+  
+	@media screen and (max-width: 782px) {
+	  .postbox {
+		.form-table {
+		  td {
+			// Reduced padding on small screens
+			padding: 10px !important;
+		  }
+		}
+	  }
+	}
+  }
+  

@@ -1,0 +1,36 @@
+name: Build PHPDocs and publish to Github Pages
+
+on:
+  workflow_run:
+    workflows: ["WordPress PHPCS Check"]
+    types:
+      - completed
+
+permissions:
+  contents: write
+
+jobs:
+  phpdoc:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+
+      - name: Download phpDocumentor .phar
+        run: wget https://phpdoc.org/phpDocumentor.phar -O phpdoc.phar
+
+      - name: Generate code-review with phpDocumentor
+        run: php phpdoc.phar -d ./ -t www
+
+      - name: Publish to code-review branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: www
+          publish_branch: code-review
+          force_orphan: true

@@ -1,0 +1,73 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: YD Mobile App 1.0.0\n"
+"POT-Creation-Date: 2025-04-30 18:42+0300\n"
+"PO-Revision-Date: 2025-04-30 20:10+0300\n"
+"Language: ro_RO\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Domain: yd-core\n"
+
+msgid "%s updated."
+msgstr "%s actualizat(ă)."
+
+msgid "%s scheduled."
+msgstr "%s programat(ă)."
+
+msgid "%s trashed."
+msgstr "%s mutat(ă) la gunoi."
+
+msgid "%s reverted to draft."
+msgstr "%s revenit(ă) la ciornă."
+
+msgid "%s published privately."
+msgstr "%s publicat(ă) privat."
+
+msgid "%s published."
+msgstr "%s publicat(ă)."
+
+msgid "%s list"
+msgstr "Listă %s"
+
+msgid "%s list navigation"
+msgstr "Navigare listă %s"
+
+msgid "Filter %s list"
+msgstr "Filtrează lista %s"
+
+msgid "Uploaded to this %s"
+msgstr "Încărcat în acest %s"
+
+msgid "Insert into %s"
+msgstr "Inserează în %s"
+
+msgid "%s Attributes"
+msgstr "Atribute %s"
+
+msgid "%s Archives"
+msgstr "Arhive %s"
+
+msgid "All %s"
+msgstr "Toate %s"
+
+msgid "No %s found in Trash."
+msgstr "Niciun %s găsit în gunoi."
+
+msgid "No %s found."
+msgstr "Niciun %s găsit."
+
+msgid "Search %s"
+msgstr "Caută %s"
+
+msgid "View %s"
+msgstr "Vizualizează %s"
+
+msgid "New %s"
+msgstr "Nou %s"
+
+msgid "Edit %s"
+msgstr "Editează %s"
+
+msgid "Add new %s"
+msgstr "Adaugă %s nou"

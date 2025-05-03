@@ -1,0 +1,40 @@
+name: WordPress PHPCS Check
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  phpcs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: composer
+
+      - name: Create composer.json
+        run: |
+          echo '{
+            "require-dev": {
+              "squizlabs/php_codesniffer": "^3.12",
+              "wp-coding-standards/wpcs": "^3.1"
+            }
+          }' > composer.json
+
+      - name: Allow plugin
+        run: composer config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
+
+      - name: Install dependencies
+        run: composer install
+
+      - name: Show installed coding standards
+        run: vendor/bin/phpcs -i
+
+      - name: Run PHPCS (WordPress coding standard)
+        run: vendor/bin/phpcs --standard=WordPress --ignore=/vendor --extensions=php .

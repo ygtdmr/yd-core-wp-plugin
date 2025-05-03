@@ -1,0 +1,345 @@
+/**
+ * SCSS styles for YD Admin UI inputs and interactive components
+ *
+ * Author: Yigit Demir
+ * Version: 1.0.0
+ * Since: 1.0.0
+ *
+ * Description:
+ *  - Provides base styling for admin input elements such as text, dropdown, selection,
+ *    media selection and contextual help tips within the `.yd-core` namespace.
+ *  - Adds responsive adjustments for mobile devices under 782px viewport width.
+ *  - Utilises WordPress admin colour variables for consistent theme integration.
+ */
+ 
+.yd-core {
+	.yd-admin-ui-input {
+		position: relative;
+
+		& > .help-tip {
+			height: 16px;
+			width: 16px;
+			position: absolute;
+			top: 12px;
+			transform: translateY(-50%);
+			left: -25px;
+
+			&::before {
+				content: "\f223";
+				font-family: Dashicons;
+				font-weight: normal;
+				font-size: 1.2em;
+				color: #666;
+				line-height: 1;
+				cursor: help;
+			}
+			
+			& > .help-text {
+				display: none;
+				position: absolute;
+				left: 50%;
+				transform: translate(-50%, 3px);
+				color: #fff;
+				font-size: .8em;
+				width: 150px;
+				max-width: 150px;
+				background: #333;
+				text-align: center;
+				border-radius: 3px;
+				padding: .618em 1em;
+				box-shadow: 0 1px 3px rgba(0,0,0,.2);
+				user-select: none;
+
+				&::after {
+					content: " ";
+					right: 0;
+					border: solid 5px transparent;
+					height: 0;
+					width: 0;
+					position: absolute;
+					pointer-events: none;
+					border-bottom-color: #333;
+					top: -8px;
+					margin-top: -2px;
+					transform: translateX(-50%);
+					left: 50%;
+				}
+			}
+			
+			&:not(:active):focus {
+				border-color: var(--wp-admin-theme-color-2);
+				box-shadow: 0 0 0 2px var(--wp-admin-theme-color-2);
+				border-radius: 2px;
+			}
+		}
+	}
+	
+	.yd-admin-ui-input-textarea > textarea {
+		min-height: 30px;
+	}
+	
+	.yd-admin-ui-input-selection > .description,
+	.yd-admin-ui-input-dropdown > .description {
+		position: absolute;
+		bottom: 0;
+		padding-top: 4px;
+	}
+	
+	.yd-admin-ui-input-dropdown > .dropdown {
+		transform: translateY(-1px);
+	}
+	
+	.yd-admin-ui-input-selection > .selection,
+	.yd-admin-ui-input-dropdown > .dropdown {
+		position: absolute;
+		cursor: text;
+		overflow: hidden;
+		box-shadow: 0 0 0 transparent;
+		border-radius: 4px;
+		border: 1px solid #8c8f94;
+		background-color: #fff;
+		color: #2c3338;
+		-webkit-user-select: none;
+		user-select: none;
+		min-height: 30px;
+	}
+	
+	.yd-admin-ui-input-selection > .selection .spinner {
+		position: absolute;
+		right: 50%;
+		top: 50%;
+		transform: translate(50%, -50%);
+		margin: 0;
+	}
+	
+	.yd-admin-ui-input-selection > .selection > input[required],
+	.yd-admin-ui-input-selection-media > .selection-media > input[required] {
+		display: block;
+		opacity: 0;
+		height: 0;
+		min-height: 0;
+		margin: 0;
+		border: 0;
+		padding: 0;
+		line-height: 0;
+	}
+	
+	.yd-admin-ui-input-selection > .selection > .name > .value,
+	.yd-admin-ui-input-dropdown > .dropdown > .display-name {
+		cursor: pointer;
+		line-height: 30px;
+		font-size: 14px;
+		padding: 0 48px 0 8px;
+		background: #fff url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%206l5%205%205-5%202%201-7%207-7-7%202-1z%22%20fill%3D%22%23555%22%2F%3E%3C%2Fsvg%3E') no-repeat right 5px top 55%;
+		background-size: 16px 16px;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+	
+	.yd-admin-ui-input-selection > .selection > .name > .value:hover,
+	.yd-admin-ui-input-dropdown > .dropdown > .display-name:hover {
+		color: var(--wp-admin-theme-color-2);
+	}
+	
+	.yd-admin-ui-input-selection > .selection > .name > .remove {
+		position: absolute;
+		right: 32px;
+		top: 0;
+		line-height: 28px;
+	}
+	
+	.yd-admin-ui-input-selection > .selection > .all-items {
+		width: 100%;
+		position: relative;
+	}
+	
+	.yd-admin-ui-input-selection > .selection > .all-items > ul,
+	.yd-admin-ui-input-dropdown > .dropdown > ul {
+		position: relative;
+		max-height: 200px;
+		overflow-y: auto;
+		min-height: 32px;
+		margin: 0;
+	}
+	
+	.yd-admin-ui-input-selection > .selection > .all-items > ul > li,
+	.yd-admin-ui-input-dropdown > .dropdown > ul > li {
+		padding: 8px 10px;
+		margin: 0;
+		cursor: pointer;
+	}
+	
+	.yd-admin-ui-input-selection > .selection > .all-items > ul > li[data-selected]:not([data-hover]),
+	.yd-admin-ui-input-dropdown > .dropdown > ul > li[data-selected]:not([data-hover]) {
+		background-color: #ddd;
+	}
+	
+	.yd-admin-ui-input-selection > .selection > .all-items > ul > li[data-hover],
+	.yd-admin-ui-input-dropdown > .dropdown > ul > li[data-hover] {
+		background-color: var(--wp-admin-theme-color-2);
+		color: #fff;
+	}
+	
+	.yd-admin-ui-input-selection > .selection:focus,
+	.yd-admin-ui-input-selection > .selection.focused,
+	.yd-admin-ui-input-dropdown > .dropdown:focus,
+	.yd-admin-ui-input-dropdown > .dropdown.focused {
+		z-index: 1;
+		border-color: var(--wp-admin-theme-color-2);
+		box-shadow: 0 0 0 1px var(--wp-admin-theme-color-2);
+	}
+	
+	
+	.yd-admin-ui-input-selection {
+		& > .selection:not(.multiple) .all-items {
+			& > ul {
+				min-height: 0;
+			}
+			
+			& > .spinner {
+				right: 18px;
+			}
+			
+			& > .edit {
+				padding: 4px;
+			}
+			
+			& > .edit > input {
+				width: 100%;
+				margin: 0;
+				padding: 0 24px 0 8px;
+				box-sizing: border-box;
+			}
+			
+			& > .edit > input:focus {
+				border: 1px solid #8c8f94;
+			}	
+		}
+		
+		& > .selection .selected-items {
+			margin: 0px;
+			padding: 0 5px;
+			overflow: clip auto;
+
+			li.edit {
+				float: left;
+				margin: 0;
+				overflow: hidden;
+				max-width: 100%;
+
+				& > input {
+					min-width: 150px;
+					margin: 2px 4px;
+					padding: 0;
+					border: none;
+					outline: none;
+					box-shadow: none;
+				}
+			}
+			
+			li:not(.edit) {
+				list-style: none;
+				background-color: #e4e4e4;
+				border: 1px solid #aaa;
+				border-radius: 4px;
+				margin: 5px 5px 5px 0;
+				padding: 2px 6px;
+				cursor: default;
+				float: left;
+
+				& > span.remove {
+					vertical-align: text-bottom;
+				}
+			}
+		}
+		
+		& > .selection .selected-items li:not(.edit) > span.remove,
+		& > .selection > .name > .remove {
+			font-weight: bold;
+			cursor: pointer;
+			color: #999;
+		}
+		
+		& > .selection .selected-items li:not(.edit) > span.remove:hover,
+		& > .selection > .name > .remove:hover {
+			color: #333;
+		}
+	}
+	
+	.yd-admin-ui-input-dropdown {
+		min-height: 30px;
+
+		& > .dropdown {
+			cursor: pointer;
+		}
+	}
+	
+	.yd-admin-ui-input-selection-media {
+		img, video {
+			width: 128px;
+			display: block;
+			border: 1px solid #aaa;
+			margin-bottom: 8px;
+		}
+		.spinner {
+			display: block;
+			float: none;
+			margin: 0;
+			margin-bottom: 0px;
+			margin-bottom: 16px;
+		}
+	}
+	
+	.yd-admin-ui-input-selection-action {
+		h4 {
+			margin: 0;
+			margin-bottom: 12px;
+		}
+		
+		.params > [data-action="add"] {
+			margin-right: 4px;
+		}
+		
+		.params-list {
+			display: table;
+			table-layout: fixed;
+			width: 100%;
+			margin-top: 8px;
+		}
+		
+		.param {
+			margin-top: 16px;
+			display: table-row;
+
+			& > * {
+				display: table-cell;
+				vertical-align: top;
+				padding-top: 4px;
+				padding-bottom: 4px;
+			}
+			
+			& > .key {
+				padding-right: 8px;
+			}
+			
+			& > *:not(.key) {
+				vertical-align: middle;
+			}
+			
+			.regular-text {
+				width: 100%;
+			}
+		}
+	}
+	
+	@media screen and (max-width: 782px) {
+		.yd-admin-ui-input > .help-tip {
+			display: none;
+		}
+	
+		.yd-admin-ui-input-selection .selection {
+			width: 100%;
+		}
+	}
+}

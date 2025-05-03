@@ -1,0 +1,78 @@
+name: Release Build
+
+on:
+  workflow_run:
+    workflows: ["WordPress PHPCS Check"]
+    types:
+      - completed
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install build tools
+        run: |
+          npm install -g sass terser
+
+      - name: Compile SCSS to minified CSS (same folder)
+        run: |
+          find . -name '*.scss' -type f | while read file; do
+            out="${file%.scss}.css"
+            sass "$file":"$out" --style=compressed
+          done
+
+      - name: Minify JS to .min.js (same folder)
+        run: |
+          find . -name '*.js' -type f ! -name '*.min.js' | while read file; do
+            out="${file%.js}.min.js"
+            terser "$file" -c -m -o "$out"
+          done
+
+      - name: Get version
+        id: get_version
+        run: echo "VERSION=$(cat *.php | grep "Version:" | head -n 1 | cut -d " " -f4 | tr -d '\n')" >> $GITHUB_ENV
+
+      - name: Create zip file
+        run: |
+          repo=$(basename $GITHUB_REPOSITORY | sed "s/-wp-plugin$//")
+          zipname="${repo}-${VERSION}.zip"
+          zip -r "$zipname" . -x "*.git*" "readme.md" ".gitignore" ".github/*"
+          echo "ZIP_FILE=$zipname" >> $GITHUB_ENV
+
+      - name: Upload release zip
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ZIP_FILE }}
+          path: ${{ env.ZIP_FILE }}
+
+      - name: Create release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ env.VERSION }}
+          name: v${{ env.VERSION }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload release asset
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ env.VERSION }}
+          name: ${{ env.ZIP_FILE }}
+          files: ${{ env.ZIP_FILE }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

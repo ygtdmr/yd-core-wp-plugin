@@ -1,0 +1,73 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: YD Mobile App 1.0.0\n"
+"POT-Creation-Date: 2025-04-30 18:42+0300\n"
+"PO-Revision-Date: 2025-04-30 20:10+0300\n"
+"Language: tr_TR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Domain: yd-core\n"
+
+msgid "%s updated."
+msgstr "%s güncellendi."
+
+msgid "%s scheduled."
+msgstr "%s planlandı."
+
+msgid "%s trashed."
+msgstr "%s çöpe atıldı."
+
+msgid "%s reverted to draft."
+msgstr "%s taslağa geri döndü."
+
+msgid "%s published privately."
+msgstr "%s özel olarak yayınlandı."
+
+msgid "%s published."
+msgstr "%s yayınlandı."
+
+msgid "%s list"
+msgstr "%s listesi"
+
+msgid "%s list navigation"
+msgstr "%s listede gezinme"
+
+msgid "Filter %s list"
+msgstr "%s listesini filtrele"
+
+msgid "Uploaded to this %s"
+msgstr "Bu %s'e yüklendi"
+
+msgid "Insert into %s"
+msgstr "%s'e ekle"
+
+msgid "%s Attributes"
+msgstr "%s Nitelikler"
+
+msgid "%s Archives"
+msgstr "%s Arşivleri"
+
+msgid "All %s"
+msgstr "Hepsi %s"
+
+msgid "No %s found in Trash."
+msgstr "Çöp Kutusu'nda %s bulunamadı."
+
+msgid "No %s found."
+msgstr "%s bulunamadı."
+
+msgid "Search %s"
+msgstr "%s'de ara"
+
+msgid "View %s"
+msgstr "%s'yi görüntüle"
+
+msgid "New %s"
+msgstr "Haberler"
+
+msgid "Edit %s"
+msgstr "%s'yi düzenle"
+
+msgid "Add new %s"
+msgstr "Yeni %s ekle"
