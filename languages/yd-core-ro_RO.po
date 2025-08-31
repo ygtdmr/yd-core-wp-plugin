@@ -71,3 +71,9 @@ msgstr "Editează %s"
 
 msgid "Add new %s"
 msgstr "Adaugă %s nou"
+
+msgid "Remove media"
+msgstr "Elimină media"
+
+msgid "Select media"
+msgstr "Selectează media"

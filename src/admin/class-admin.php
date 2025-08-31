@@ -29,6 +29,8 @@ abstract class Admin {
 	 * loading pages and sending AJAX actions.
 	 */
 	public function __construct() {
+		Utils\Main::check_updates();
+
 		Utils\Main::add_filter(
 			'admin_body_class',
 			function ( $classes ) {

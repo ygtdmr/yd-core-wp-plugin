@@ -71,3 +71,9 @@ msgstr "%s'yi düzenle"
 
 msgid "Add new %s"
 msgstr "Yeni %s ekle"
+
+msgid "Remove media"
+msgstr "Medyayı Kaldır"
+
+msgid "Select media"
+msgstr "Medya Seç"

@@ -1,3 +1,5 @@
 .phpdoc
 doc
 .DS_Store
+*.css
+*.css.map

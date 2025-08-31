@@ -5,21 +5,22 @@
  * @package YD
  * @author Yigit Demir
  * @since 1.0.0
- * @version 1.0.0
+ * @version 1.0.1
  *
  * Plugin Name: YD Core
+ * Plugin URI: https://github.com/ygtdmr/yd-core-wp-plugin
  * Description: Provides the requirements of YD based plugins.
  * Author: Yigit Demir
  * Author URI: https://github.com/ygtdmr
- * Version: 1.0.0
+ * Version: 1.0.1
  * Text Domain: yd-core
  * Domain Path: /languages
  * Requires at least: 6.8
  * Requires PHP: 8.0
  * License: GPL-2.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * WC requires at least: 9.8
- * WC tested up to: 9.8.3
+ * WC requires at least: 10.1
+ * WC tested up to: 10.1.2
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -33,7 +34,9 @@ defined( 'ABSPATH' ) || exit;
  * @return void
  */
 function yd_core_update_slug() {
-	$GLOBALS['YD_CURRENT_PLUGIN'] = YD_CORE;
+	if ( empty( $GLOBALS['YD_CURRENT_PLUGIN'] ) ) {
+		$GLOBALS['YD_CURRENT_PLUGIN'] = YD_CORE;
+	}
 }
 
 /**
@@ -64,6 +67,7 @@ function yd_core_before_init() {
 	require_once __DIR__ . '/src/class-core-library.php';
 
 	new \YD\Library\Core_Library();
+	unset( $GLOBALS['YD_CURRENT_PLUGIN'] );
 }
 
 yd_core_before_init();
@@ -80,14 +84,18 @@ yd_core_before_init();
 function yd_core_init() {
 	yd_core_update_slug();
 
-	load_plugin_textdomain( YD_CORE, false, plugin_basename( __DIR__ ) . '/languages' );
+	get_translations_for_domain( YD_CORE );
 
-	add_filter(
-		'admin_body_class',
-		function ( $classes ) {
-			return $classes . sprintf( ' %s ', YD_CORE );
-		}
-	);
+	if ( is_admin() ) {
+		\YD\Utils\Main::check_updates();
+		add_filter(
+			'admin_body_class',
+			function ( $classes ) {
+				return $classes . sprintf( ' %s ', YD_CORE );
+			}
+		);
+	}
+	unset( $GLOBALS['YD_CURRENT_PLUGIN'] );
 }
 
 add_action( 'init', 'yd_core_init' );

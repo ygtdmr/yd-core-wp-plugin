@@ -261,10 +261,9 @@ final class Customer {
 	 *
 	 * @param int    $order_id The order ID.
 	 * @param string $message The message to send.
-	 * @param string $agent The agent sending the message (defaults to 'yd-core').
 	 * @return array|\WP_Error
 	 */
-	public function send_order_message( int $order_id, string $message, string $agent = 'yd-core' ): array|\WP_Error {
+	public function send_order_message( int $order_id, string $message ): array|\WP_Error {
 		$order = wc_get_order( $order_id );
 
 		if ( ! $order || $order->get_customer_id() !== $this->id ) {
@@ -273,10 +272,10 @@ final class Customer {
 
 		add_filter(
 			'woocommerce_new_order_note_data',
-			function ( array $data ) use ( $agent ) {
+			function ( array $data ) {
 				$data['comment_author']       = 'customer';
 				$data['comment_author_email'] = '';
-				$data['comment_agent']        = $agent;
+				$data['comment_agent']        = $GLOBALS['YD_CURRENT_PLUGIN'];
 				return $data;
 			}
 		);
@@ -301,7 +300,7 @@ final class Customer {
 		$notes = $order->get_customer_order_notes();
 		return array_map(
 			function ( \WP_Comment $note ) {
-				$is_user = 'yd-mobile-app' === $note->comment_agent;
+				$is_user = $GLOBALS['YD_CURRENT_PLUGIN'] === $note->comment_agent;
 
 				if ( $is_user ) {
 					$note->comment_author = __( 'Customer', 'woocommerce' );

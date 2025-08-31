@@ -62,9 +62,9 @@ final class Selection_Media extends Input {
 			<span class="button action" tabindex="0" <?php $this->render_attribute_id_input(); ?>>
 			<?php
 			if ( ( (int) $this->get_value() ) === 0 ) :
-				esc_html_e( 'Select media', 'yd-mobile-app' );
+				esc_html_e( 'Select media', 'yd-core' );
 else :
-	esc_html_e( 'Remove media', 'yd-mobile-app' );
+	esc_html_e( 'Remove media', 'yd-core' );
 endif;
 ?>
 </span>

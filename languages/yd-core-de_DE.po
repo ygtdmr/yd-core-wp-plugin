@@ -71,3 +71,9 @@ msgstr "%s bearbeiten"
 
 msgid "Add new %s"
 msgstr "Neues %s hinzufügen"
+
+msgid "Remove media"
+msgstr "Medium entfernen"
+
+msgid "Select media"
+msgstr "Medium auswählen"

@@ -268,6 +268,61 @@ final class Main {
 	}
 
 	/**
+	 * Checks for plugin updates from GitHub and hooks into the WordPress
+	 * update system.
+	 *
+	 * Compares the installed version with the latest version in the GitHub
+	 * repository. If a newer version is available, it adds the update info
+	 * to the `site_transient_update_plugins` filter.
+	 *
+	 * @global string $YD_CURRENT_PLUGIN Holds the name of the current plugin.
+	 * @return void
+	 */
+	public static function check_updates() {
+		$plugin_slug = $GLOBALS['YD_CURRENT_PLUGIN'];
+		$plugin_file = sprintf( '%s/%s.php', $plugin_slug, $plugin_slug );
+		add_action(
+			"in_plugin_update_message-$plugin_file",
+			function () use ( $plugin_file ) {
+				?>
+			<script>
+				(() => {
+					const buttonPluginDetails = document.querySelector(
+						'tr[data-plugin="<?php echo esc_html( $plugin_file ); ?>"] .open-plugin-details-modal'
+					);
+					buttonPluginDetails.classList.remove('thickbox');
+					buttonPluginDetails.href = buttonPluginDetails.href.split('?')[0];
+				})();
+			</script>
+				<?php
+			}
+		);
+		$new_header = get_plugin_data(
+			"https://raw.githubusercontent.com/ygtdmr/$plugin_slug-wp-plugin/refs/heads/main/$plugin_slug.php"
+		);
+		if ( empty( $new_header ) ) {
+			return;
+		}
+		$header      = get_plugin_data( sprintf( '%s/%s', WP_PLUGIN_DIR, $plugin_file ) );
+		$new_version = $new_header['Version'];
+		$version     = $header['Version'];
+		add_filter(
+			'site_transient_update_plugins',
+			function ( $transient ) use ( $plugin_slug, $new_version, $version ) {
+				if ( ! empty( $transient ) && version_compare( $new_version, $version, '>' ) ) {
+					$transient->response[ "$plugin_slug/$plugin_slug.php" ] = ( (object) array(
+						'id'          => '',
+						'url'         => "https://github.com/ygtdmr/$plugin_slug-wp-plugin/releases/tag/v$new_version",
+						'new_version' => $new_version,
+						'package'     => "https://github.com/ygtdmr/$plugin_slug-wp-plugin/releases/download/v$new_version/$plugin_slug-$new_version.zip",
+					) );
+				}
+				return $transient;
+			}
+		);
+	}
+
+	/**
 	 * Inserts an attachment into WordPress.
 	 *
 	 * This method handles the process of inserting an attachment (file or URL) into

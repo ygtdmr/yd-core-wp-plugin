@@ -276,7 +276,7 @@ abstract class Page {
 		$data = json_decode( Data_Manager::read_file( $json_path ), true );
 		foreach ( $data as $text => $domain ) {
 			// phpcs:ignore WordPress.WP.I18n, Universal.Operators.DisallowShortTernary
-			$data[ $text ] = __( $text, $domain ?: 'yd-mobile-app' );
+			$data[ $text ] = __( $text, $domain ?: $GLOBALS['YD_CURRENT_PLUGIN'] );
 		}
 
 		return $data;

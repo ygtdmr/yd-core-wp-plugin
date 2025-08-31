@@ -71,3 +71,9 @@ msgstr "Modifier %s"
 
 msgid "Add new %s"
 msgstr "Ajouter un nouveau %s"
+
+msgid "Remove media"
+msgstr "Supprimer le média"
+
+msgid "Select media"
+msgstr "Sélectionner un média"
