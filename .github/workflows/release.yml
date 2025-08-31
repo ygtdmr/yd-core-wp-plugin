@@ -47,7 +47,7 @@ jobs:
       - name: Create zip file
         run: |
           repo=$(basename $GITHUB_REPOSITORY | sed "s/-wp-plugin$//")
-          zipname="${repo}-${VERSION}.zip"
+          zipname="${repo}.zip"
           zip -r "$zipname" . -x "*.git*" "readme.md" ".gitignore" ".github/*"
           echo "ZIP_FILE=$zipname" >> $GITHUB_ENV
 

@@ -311,7 +311,7 @@ final class Main {
 			function ( $transient ) use ( $plugin_slug, $new_version, $version ) {
 				if ( ! empty( $transient ) && version_compare( $new_version, $version, '>' ) ) {
 					$transient->response[ "$plugin_slug/$plugin_slug.php" ] = ( (object) array(
-						'id'          => '',
+						'id'          => $plugin_slug,
 						'url'         => "https://github.com/ygtdmr/$plugin_slug-wp-plugin/releases/tag/v$new_version",
 						'new_version' => $new_version,
 						'package'     => "https://github.com/ygtdmr/$plugin_slug-wp-plugin/releases/download/v$new_version/$plugin_slug-$new_version.zip",
