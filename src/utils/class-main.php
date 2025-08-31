@@ -314,7 +314,7 @@ final class Main {
 						'id'          => $plugin_slug,
 						'url'         => "https://github.com/ygtdmr/$plugin_slug-wp-plugin/releases/tag/v$new_version",
 						'new_version' => $new_version,
-						'package'     => "https://github.com/ygtdmr/$plugin_slug-wp-plugin/releases/download/v$new_version/$plugin_slug-$new_version.zip",
+						'package'     => "https://github.com/ygtdmr/$plugin_slug-wp-plugin/releases/download/v$new_version/$plugin_slug.zip",
 					) );
 				}
 				return $transient;
